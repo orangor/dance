@@ -1,0 +1,23 @@
+ sin(x+△x)-sinx         sin(x+△x)=sinxcos△x+cosxsi
+------------------- =-------------------------------
+     △x                         △x
+   f(x)-f(x_0)
+-----------------
+   △x
+
+sinx 导
+cosx 导
+
+
+tail log
+
+
+INSERT INTO `%s`(`day`,`total`) VALUES(?, 1) ON DUPLICATE KEY UPDATE `total`=`total`+1
+
+345\
+322
+1.打开文件
+2.获取json
+3.转化json
+4.储存
+5.下一个

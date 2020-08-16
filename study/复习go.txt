@@ -1,0 +1,203 @@
+/r/n 写入换行
+lbdnfeypwgbidbcg
+aievcdmgmixbbgdg
+%x 格式限定符用于指定 16 进制编码
+%T
+每个汉字占3个字节
+指针变量的类型为 *T，该指针指向一个 T 类型的变量
+
+常量  const(关键字）★★★
+用法：
+const a=5
+const b="hello world"
+go install hello
+函数  ：
+日志  ★★★★★
+func init(){
+init 函数可用于执行初始化任务，也可用于在开始执行之前验证程序的正确性。
+log.Fatal("想打印的日志内容")
+}
+空白符“_”★
+
+一个注意点  ★
+else 语句应该在 if 语句的大括号 } 之后的同一行中。如果不是，编译器会不通过。
+
+关于循环   ★
+break  终止循环
+continue  跳过本次循环
+for{fmt.Println("无限循环")}
+
+关于 switch★★
+在 switch 语句中，表达式是可选的，可以被省略。如果省略表达式，则表示这个 switch 语句等同于 switch true，并且每个 case 表达式都被认定为有效，相应的代码块也会被执行。
+例句：
+switch value {
+   case n:
+fmt.Println()
+   case n1,n2,n3:
+fmt.Println()
+   default:
+fmt.Println()
+}
+Fallthrough 语句★★★★★
+在 Go 中，每执行完一个 case 后，会从 switch 语句中跳出来，不再做后续 case 的判断和执行。使用 fallthrough 语句可以在已经执行完成的 case 之后，把控制权转移到下一个 case 的执行代码中。
+例句：
+ switch num := number(); { // num is not a constant
+    case num < 50:
+        fmt.Printf("%d is lesser than 50\n", num)
+        fallthrough
+    case num < 100:
+        fmt.Printf("%d is lesser than 100\n", num)
+        fallthrough
+    case num < 200:
+        fmt.Printf("%d is lesser than 200", num)
+    }
+
+}
+
+数组: ★
+len()数组长度   cap()数组容量  range:迭代数组  i,v:=range array
+arr:=[...]int{}//不确定长度数组★★
+切片:  ★★★★★★
+切片自己不拥有任何数据。它只是底层数组的一种表示。对切片所做的任何修改都会反映在底层数组中。
+切片的创建
+格式1:
+ arr := [5]int{76, 77, 78, 79, 80}
+ var cap []int = a[1:4]
+
+格式2：
+cap:=make([]string,len,cap)
+追加切片
+cap=append(cap,"add value")
+格式3：
+var cap []string
+cap=append(cap,"adv","adv",adv")
+格式4：
+cap := []string{"potatoes", "tomatoes", "brinjal"}
+多维切片
+var caps=[][]string{}
+内存优化：看图
+
+可变函数★★
+func append(slice []Type, elems ...Type) []Type
+方法可以传入任意个数的[]Type值
+nums := []int{89, 90, 95}
+如果需要传入nums这样的切片，
+需要append(num...)★★
+Map★★★★★
+格式1
+ personSalary := make(map[string]int)
+    personSalary["steve"] = 12000
+    personSalary["jamie"] = 15000
+    personSalary["miked"] = 10000
+格式2
+personSalary := map[string]int {
+        "steve": 12000,
+        "jamie": 15000,
+    }
+添加Map元素
+personSalary["mike"] = 9000
+获取Map元素
+employee := "jamie"
+fmt.Println("Salary of", employee, "is", personSalary[employee])
+果我们获取一个不存在的元素，会返回 int 类型的零值 0
+删除Map元素 
+delete(personSalary, "steve")
+取 map 中某个 key 是否存在的语法
+value, ok := map[key]
+Map相等性
+Map 之间不能使用 == 操作符判断，== 只能用来检查 map 是否为 nil。
+
+
+rune★★★★
+runes := []rune(String)
+rune:rune 是 Go 语言的内建类型，它也是 int32 的别称。在 Go 语言中，rune 表示一个代码点。代码点无论占用多少个字节，都可以用一个 rune 来表示。
+字符串for range循环
+例子：
+for index, rune := range s {
+        fmt.Printf("%c starts at byte %d\n", rune, index)
+    }
+字符串  ★
+用rune切片构造字符串
+runeSlice := []rune{0x0053, 0x0065, 0x00f1, 0x006f, 0x0072}
+字符串长度
+import (  
+    "fmt"
+    "unicode/utf8"
+)
+
+func length(s string) {  
+    fmt.Printf("length of %s is %d\n", s, utf8.RuneCountInString(s))
+}
+Go 中的字符串是不可变的。一旦一个字符串被创建，那么它将无法被修改★★★
+为了修改字符串，可以把字符串转化为一个 rune 切片。然后这个切片可以进行任何想要的改变，然后再转化为一个字符串★★★
+例子：
+func mutate(s []rune) string {  
+    s[0] = 'a' 
+    return string(s)
+}
+指针声明：
+函数传递一个数组指针参数，并在函数内修改数组。尽管它是有效的，但却不是 Go 语言惯用的实现方式。我们最好使用切片来处理。
+Go 不支持指针运算
+在非结构体上的方法
+
+
+匿名字段的方法
+属于结构体的匿名字段方法可以被直接调用，就好像这些方法是属于定义了匿名字段的结构体一样。
+
+接口★
+类型判断★
+☆func assert(i interface{}) {  
+    s := i.(int) //get the underlying int value from i
+    fmt.Println(s)
+}
+?这个接口传入非int类型会报错
+☆func assert(i interface{}) {  
+    v, ok := i.(int)
+    fmt.Println(v, ok)
+}
+√这个接口传入非int不会报错 ok返回false,反之true
+
+★类型选择 TypeSwitch
+func findType(i interface{}) {  
+    switch i.(type) {
+    case string:
+        fmt.Printf("I am a string and my value is %s\n", i.(string))
+    case int:
+        fmt.Printf("I am an int and my value is %d\n", i.(int))
+    default:
+        fmt.Printf("Unknown type\n")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

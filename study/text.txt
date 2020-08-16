@@ -1,0 +1,28 @@
+fileServer := http.StripPrefix(absolutePath, http.FileServer(fs))
+	_, nolisting := fs.(*onlyfilesFS)
+	return func(c *Context) {
+		if nolisting {
+			c.Writer.WriteHeader(http.StatusNotFound)
+		}
+		fileServer.ServeHTTP(c.Writer, c.Request)
+	}
+now := time.Now().AddDate(0, 0, -1) 
+
+
+	-ms-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out; 
+
+
+	-moz-transform:rotate(360deg) scale(1.1);
+	-wekit-transform:rotate(360deg) scale(1.1);
+	-o-transform:rotate(360deg) scale(1.1);
+
+
+
+	-ms-border-radius: 100px;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-o-border-radius: 100px;
+

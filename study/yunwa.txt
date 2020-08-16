@@ -1,0 +1,2 @@
+http://ops.netwa.cn/
+kafka-console-producer.sh --broker-list 192.168.0.152:9092 --topic topic_user

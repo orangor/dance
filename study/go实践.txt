@@ -1,0 +1,2 @@
+append（切片,0）相当于new一个切片，内存地址发生改变。
+Ctrl +All//vscode 看源码

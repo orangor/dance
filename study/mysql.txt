@@ -1,0 +1,96 @@
+./send_log -etcd http://etcdcluster.in.netwa.cn:2379
+mysql -uroot -pYunwa2018-03-10 -h test_db
+ db, err := gorm.Open("mysql", "root:Yunwa2018-03-10@(test_db:3306)/logic?charset=utf8&parseTime=True&loc=Local") 
+
+工具连接：
+登录：  106.14.158.135
+密码：   Yunwa2018-03-10
+  
+
+
+数据库：
+数据以表格的形式出现
+每行为各种记录名称
+每列为记录名称所对应的数据域
+许多行和列组成一张表单
+若干的表单组成database
+
+SQL术语
+数据库：关联表的集合
+数据表：数据的矩阵，在数据库中的表看起来像一个简单的电子表格
+列：一列（数据元素）包含了相同的数据
+行：一行（=元组，或记录）是一组相关的数据
+冗余：储存两倍数据，冗余降低了性能，但提高了数据的安全性
+主键：主键是唯一的，一个数据表中只能包含一个主键。可以使用主键来查询数据。
+外键：外键用于关联两个表
+复合键：复合键（组合键）将多个列作为一个索引键，一般用于复合索引。
+索引：使用索引可加快访问数据表中的特定信息。索引是对数据库表中一列或多列的值进行排序得的一种结构。
+参照完整性：参照完整性要求关系中不允许引用不存在的实体。与完整性是关系模型必须满足的完整约束条件，目的是保证数据的一致性。
+
+select * from tables  where **
+修改
+update table set* where **    ----| UPDATE
+delete from table where **    ----| DELETE
+查询
+select * from table  where   * Like  "%varchar"/int ----| LIKE
+UNION 取交集
+UNION ALL 取全集
+select * from  table  ORDER BY * ASC/DESC  ----| ORDER BY
+select *,COUNT(*) from table GROUP BY *    ----| COUNT GROUP BY
+select COALESCE(name,'总数'),SUM(value)  AS value_name from employee_tbl GROUP BY name WITH ROLLUP --| COALESCE(),SUM() AS GROUP BY WITH ROLLUP
+
+navicate 注册码
+名,组织,注册码：
+NAVN-LNXG-XHHX-5NOO
+NAVH-WK6A-DMVK-DKW3
+  
+
+
+centos 安装数据库mysql5.6
+# wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+# rpm -ivh mysql-community-release-el7-5.noarch.rpm
+# yum install mysql-community-server
+重启mysql服务
+# service mysqld restart
+第一次登录 
+#mysql -u root 
+设置密码
+mysql> set password for 'root'@'localhost' =password('password');
+使更改生效 
+[root@yl-web yl]# rpm -qa |grep mariadb
+
+设置编码
+mysql配置文件为/etc/my.cnf
+
+最后加上编码配置（utf-8）
+
+[mysql]
+default-character-set =utf8
+这里的字符编码必须和/usr/share/mysql/charsets/Index.xml中一致。
+远程连接设置：
+1.把在所有数据库的所有表的所有权限赋值给位于所有IP地址的root用户。
+mysql> grant all privileges on *.* to root@'%'identified by 'password';
+2.如果是新用户而不是root，则要先新建用户
+mysql>create user 'username'@'%' identified by 'password'; 
+四种隔离级别：
+Read Uncommitted(读取未提交内容）---多事务都未提交
+Read Committed(读取提交内容）---多事务读取提交
+Repeatable Read(可重读）----一个事务读取提交
+Serializable(可串行化）-----一个事务读取提交，且不可以有其他提交（对事务排序）
+
+安装mysql5.8
+官网下载源<< mysql80-community-release-el7-3.noarch.rpm>>centos7对应版本
+https://dev.mysql.com/downloads/repo/yum/
+
+rpm  -ivh  mysql80-community-release-el7-3.noarch.rpm;
+yum clean all 
+yum makecache
+yum -y install mysql-community-server
+# 登陆修改密码
+grep "password" /var/log/mysqld.log //获取第一次登陆的密码
+mysql -u root 
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'HelloJava0903!';//第一次规范的密码
+SHOW VARIABLES LIKE 'validate_password%';
+set global validate_password_policy=LOW;
+alter user 'root'@'localhost' identified  by '19973232abc';//想要修改的密码
+

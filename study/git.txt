@@ -1,0 +1,89 @@
+yum install git
+git config --global user.name "orange"
+git config --global user.email"1176902141@qq.com"
+git config --list
+git init
+
+useradd git
+passwd git
+ssh-keygen -t rsa -C "your_email@youremail.com
+SHA256:O/W0lb2hoFm6gBUBxbdwYdY+pfdSqlxsgh2j1bKkcRA 1176902141@qq.com
+cd ~/.ssh/
+cat id_rsa.pub
+   git status
+   git add single_check/
+   git commit -m 'add single check'
+   git config --global user.email "3441602787@qq.com"
+   git config --global user.name "orangeor"
+   git commit -m 'add single check'
+   git push
+
+   git status
+   git add ../logic/single_level.go
+   git commit -m "ss"
+   git push
+
+git add .
+git add --all .
+git commit -m "say"
+git push
+
+
+
+adduser git       #添加用户git
+  3 passwd git        #更改git的密码
+  4 #然后按照提示连输2次密码
+  5 vi /etc/passwd         #找到第6行，换为第7行
+  6 git:x:1001:1001::/home/git:/bin/bash
+  7 git:x:1001:1001::/home/git:/usr/local/git/bin/git-shell
+  8 cd /home/git/
+  9 mkdir .ssh
+ 10 chmod 755 .ssh
+ 11 touch .ssh/authorized_keys
+ 12 chmod 644 .ssh/authorized_keys
+ 13 
+ 14 cd /home
+ 15 mkdir mycode
+ 16 chown git mycode/                    #更改所属用户
+ 17 cd mycode
+ 18 git init --bare test.git             #初始化仓库
+ 19 chown -R git test.git                #更改所属用户
+ 
+20 
+ 21 git clone git@127.0.0.1:/home/mycode/test.git
+  git clone orange@134.175.42.55:/home/data/box.git
+ 22 #127.0.0.1应当更换为你的服务器IP地址
+23 git push origin master
+ //===============================//
+版本回退
+git log/git log --pretty=oneline 查看历史版本记录,id 
+git reset --hard HEAD^
+HEAD:当前版本
+HEAD^ 上个版本
+HEAD^^上上个版本
+HEAD~100 上100个版本
+git reset --hard 8f4623//通过commit id 到某个版本 id 不用写全
+git reflog 查询每一次命令 id的变更
+//================================//
+撤销文件修改
+git diff HEAD -- readme.txt//查看工作区和版本库里的最新版本区别
+git checkout -- readme.txt//回到最近一次git commit或git add时的状态。
+
+如果已经add 使用 git reset HEAD readme.txt 放回到工作区，然后git checkout -- readme.txt
+//删除文件 git rm readme.txt
+
+分支(指针的变化)
+
+查看分支：git branch
+
+创建分支：git branch <name>
+
+切换分支：git checkout <name>
+
+创建+切换分支：git checkout -b <name>
+
+合并某分支到当前分支：git merge <name>
+
+删除分支：git branch -d <name>
+git log --graph 查看分支合并图
+合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。

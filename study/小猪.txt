@@ -1,0 +1,197 @@
+SLICED:九宫格
+储存数据结构{
+1:解锁type ,金币n
+2:解锁type,金币n
+3:解锁type,金币n
+4:解锁type,金币n
+5:解锁type,金币n
+6:解锁type,金币n
+7:解锁type,金币n
+}
+if 1==x{
+金币===10000
+}
+金币系统
+
+Animation:
+idle
+3
+idle
+walk
+jump
+
+
+解锁数据{
+skin_a:1,
+skin_b:0,
+skin_c:0,
+skin_d:0,
+skin_e:0,
+skin_f:0,
+skin_g:0,
+skin_h:0
+}
+金币对应{
+skin_a:100,
+skin_b:100,
+skin_c:100,
+skin_d:100,
+skin_e:100,
+skin_f:100,
+skin_g:100,
+skin_h:100,
+}
+皮肤类型对应/id对应{
+
+skin_a:0,
+skin_b:1,
+skin_c:2,
+skin_d:3,
+skin_e:4,
+skin_f:5,
+skin_g:6,
+skin_h:7,
+}
+key{
+open:0,
+close:1,
+}
+皮肤结构{
+type:a,
+id:0,
+key:0
+}
+
+if(skin_a==0){
+this.x.active=true
+}else{
+this.x.active=flase
+}
+if(ski_a==0){
+金币减少,
+解锁皮肤,  this.j.active=true
+}else{
+on type change 
+this type add 红框
+}
+level{
+skindata{
+exit:skin_a,
+type:a
+}
+}
+skin.js{
+if type != on type
+delete type in on
+create type in on
+}
+游戏第一次启动储存数据
+{
+皮肤解锁数据,
+初始框的历史位置
+}
+判断是否储存数据
+没有初始化数据
+读取数据 
+
+拿到对应的数组[]{skntype:n......}初始框位置
+{id:0,type a,show:1}
+金币框{type==>金币值}
+
+show change ,active=flase,
+根据数组情况创建 屏蔽框 初始选择框
+点击皮肤 删除/创建 选择框 更改解锁金币对应的值
+点击解锁 金币数量减少  屏蔽框隐藏或者删除,
+皮肤形象发生改变
+
+shadow
+tail
+bdoy
+caomao:4,帽子/huangguan
+eye
+yanjing:5眼睛
+nose
+mouth
+-3,42.3;
+-3,18.1;
+0,44;
+-2,23;
+-3,57.4
+-3.1,36
+-3.1,19
+this.role.changeSkin(type)  this.role.changeSkin(type)
+
+/------------------------------/
+ createTile:
+  let tileNode = new cc.Node("tile");
+  tileNode.width = 180;
+  tileNode.height = 182;
+  let tileComponent = tileNode.addComponent("Tile");
+  tileNode.addComponent(cc.Sprite);
+
+  let pathNode = new cc.Node("path");
+  pathNode.width = tileNode.width;
+  pathNode.height = tileNode.height;
+  pathNode.addComponent(cc.Sprite);
+
+  tileNode.addChild(pathNode);
+  return tileNode;
+/-----------------------------/
+getTileNode();线程池
+
+下一关:
+/AAAAA/
+关卡Id.
+获取关卡数据.
+音频初始化.
+/AAAA/
+创建背景
+/aaaaaa/
+
+/aaaaaa/
+创建tiles
+/aaaaaaa/
+数据处理
+创建tile
+获取到tile的脚本<组件>
+设置组件type
+设置组件的类型(titeData)信息
+将没个tile添加到tilesNode中
+/循环
+设置每个tile的位置
+/aaaaaaa/
+移动方块,//tile.js
+检查过关条件
+//AAAAAA//
+通过 startTile.dir
+确定下一个需要获取的dir
+通过获取dir找到满足的条件的tile,以及tile的位置
+判断该位置的tile是否满足条件
+再判断该位置的tile是否是终点
+第一关会做一个判断
+/---------/
+/AAAAAAAAA/
+role.js
+/?ture 是否应该放在最前面
+拿到储存的路径数组信息
+拿到start的数据信息
+判断出下一个可以拿到的信息
+就开始移动
+然后判断数组是否是已经走完
+//循环 
+到数组已经走完
+/本地储存关卡数据
+/读取本地数据将关卡数据(星星数量)更新到子域
+/aaaaaa/
+/把当前关卡的节点放回缓存池
+/展示过关信息
+点击nentButton 跳转到下一关
+/更新关卡
+
+
+
+
+
+
+
+

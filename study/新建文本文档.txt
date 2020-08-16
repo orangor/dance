@@ -1,0 +1,174 @@
+ping 127.0.0.1 -n 10
+
+
+"%SystemRoot%\System32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\";F:\GO\bin;C:\Program Files\Java\jdk-10.0.2\bin;C:\TDM-GCC-64\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\Git\bin;C:\Windows\System32;
+
+type Message struct {
+	header      header
+	parts       []*part
+	attachments []*file
+	embedded    []*file
+	charset     string
+	encoding    Encoding
+	hEncoder    mimeEncoder
+	buf         bytes.Buffer
+}
+
+func (m *Message) Attach(filename string, settings ...FileSetting) {
+	m.attachments = m.appendFile(m.attachments, filename, settings)
+}
+
+
+func (m *Message) appendFile(list []*file, name string, settings []FileSetting) []*file {
+	f := &file{
+		Name:   filepath.Base(name),
+		Header: make(map[string][]string),
+		CopyFunc: func(w io.Writer) error {
+			h, err := os.Open(name)
+			if err != nil {
+				return err
+			}
+			if _, err := io.Copy(w, h); err != nil {
+				h.Close()
+				return err
+			}
+			return h.Close()
+		},
+	}
+func NewPlainDialer(host string, port int, username, password string) *Dialer {
+	return NewDialer(host, port, username, password)
+}
+func NewDialer(host string, port int, username, password string) *Dialer {
+	return &Dialer{
+		Host:     host,
+		Port:     port,
+		Username: username,
+		Password: password,
+		SSL:      port == 465,
+	}
+}
+func (d *Dialer) DialAndSend(m ...*Message) error {
+	s, err := d.Dial()
+	if err != nil {
+		return err
+	}
+	defer s.Close()
+
+	return Send(s, m...)
+}
+func (d *Dialer) Dial() (SendCloser, error) {
+	conn, err := netDialTimeout("tcp", addr(d.Host, d.Port), 10*time.Second)
+	if err != nil {
+		return nil, err
+	}
+
+	if d.SSL {
+		conn = tlsClient(conn, d.tlsConfig())
+	}
+
+	c, err := smtpNewClient(conn, d.Host)
+	if err != nil {
+		return nil, err
+	}
+
+	if d.LocalName != "" {
+		if err := c.Hello(d.LocalName); err != nil {
+			return nil, err
+		}
+	}
+
+	if !d.SSL {
+		if ok, _ := c.Extension("STARTTLS"); ok {
+			if err := c.StartTLS(d.tlsConfig()); err != nil {
+				c.Close()
+				return nil, err
+			}
+		}
+	}
+
+	if d.Auth == nil && d.Username != "" {
+		if ok, auths := c.Extension("AUTH"); ok {
+			if strings.Contains(auths, "CRAM-MD5") {
+				d.Auth = smtp.CRAMMD5Auth(d.Username, d.Password)
+			} else if strings.Contains(auths, "LOGIN") &&
+				!strings.Contains(auths, "PLAIN") {
+				d.Auth = &loginAuth{
+					username: d.Username,
+					password: d.Password,
+					host:     d.Host,
+				}
+			} else {
+				d.Auth = smtp.PlainAuth("", d.Username, d.Password, d.Host)
+			}
+		}
+	}
+
+	if d.Auth != nil {
+		if err = c.Auth(d.Auth); err != nil {
+			c.Close()
+			return nil, err
+		}
+	}
+
+	return &smtpSender{c, d}, nil
+}
+func Send(s Sender, msg ...*Message) error {
+	for i, m := range msg {
+		if err := send(s, m); err != nil {
+			return fmt.Errorf("gomail: could not send email %d: %v", i+1, err)
+		}
+	}
+
+	return nil
+}
+
+func send(s Sender, m *Message) error {
+	from, err := m.getFrom()
+	if err != nil {
+		return err
+	}
+
+	to, err := m.getRecipients()
+	if err != nil {
+		return err
+	}
+
+	if err := s.Send(from, to, m); err != nil {
+		return err
+	}
+
+	return nil
+}
+func (m *Message) getRecipients() ([]string, error) {
+	n := 0
+	for _, field := range []string{"To", "Cc", "Bcc"} {
+		if addresses, ok := m.header[field]; ok {
+			n += len(addresses)
+		}
+	}
+	list := make([]string, 0, n)
+
+	for _, field := range []string{"To", "Cc", "Bcc"} {
+		if addresses, ok := m.header[field]; ok {
+			for _, a := range addresses {
+				addr, err := parseAddress(a)
+				if err != nil {
+					return nil, err
+				}
+				list = addAddress(list, addr)
+			}
+		}
+	}
+
+	return list, nil
+}
+func parseAddress(field string) (string, error) {
+	addr, err := mail.ParseAddress(field)
+	if err != nil {
+		return "", fmt.Errorf("gomail: invalid address %q: %v", field, err)
+	}
+	return addr.Address, nil
+}
+type Sender interface {
+	Send(from string, to []string, msg io.WriterTo) error
+}

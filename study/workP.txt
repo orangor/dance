@@ -1,0 +1,147 @@
+简单英语
+geometry 几何
+rectangle 矩形
+statement 声明 
+condition 状态
+initialisation 初始化
+variadic  多变的
+function 功能
+
+变量、常量、函数、结构体、接口、方法、数组/切片、maps、协程、defer、panic、recover
+
+安装 centos7.2
+安装golang1.9
+a.网络问题
+输入ifconfig命令后，没有inet addr这一项？
+重启下网络/etc/init.d/network restart
+然后再ifconfig 
+vim安装
+粘贴多行空格问题解决
+secureCRT会将你原来的文本原封不动的按照字符串的样式发送给服务器。所以当你的服务器上的vim设置为autoindent的话，在i模式下，那么它会将secureCRT传输而来的这些字符串再进行一下缩进。若你拷贝的文本中已经有表示缩进的空格或者制表符的话，它们也会被当成字符串，而被缩进。
+解决办法：
+1. 在拷贝前输入:set paste (这样的话，vim就不会启动自动缩进，而只是纯拷贝粘贴）
+2. 拷贝完成之后，输入:set nopaste (关闭paste)
+
+vundle
+安装和更新后,重新生成帮助标签
+安装vundle
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+E185: Cannot find color scheme 'solarized'
+1
+默认安装在/.vim/bundle/vundle下；
+配置说明：
+插件有三种类型: 
+1. Github上vim-scripts仓库的插件 
+2. Github上非vim-scripts仓库的插件 
+3. 不在Github上的插件 
+对于不同的插件，vundle自动管理和下载插件的时候，有不同的地址填写方法，有如下三类： 
+1. 在Github上vim-scripts用户下的仓库,只需要写出repos（仓库）名称 
+2. 在Github其他用户下的repos, 需要写出”用户名/repos名” 
+3. 不在Github上的插件，需要写出git全路径
+
+/usr/local
+
+yum install ctag
+yum install ctags
+
+Tagbar
+qall
+wqall
+:.,.+3wqall
+
+
+
+go基础学习
+包管理工具 govendor
+搭建vim基础环境（go使用的插件）vim~/.vimrc
+
+xshell
+
+
+tree
+//-------------------------------------
+//-------------------------------------
+go基础学习
+ 工作区                            $HOME/go
+源文件 工作区的src目录下 go/src
+运行go程序
+方法1：go run $HOME/go/src/hello/helloworld.go
+方法2：A.go install hello    B./home/thinker/mygo/bin/hello
+函数声明：
+fuc  函数民  （函数类型） 返回值类型 {}
+运行程序
+go run  workspacepath/程序位置
+go install 程序所在包  然后 工作区/bin/程序包名
+go playground
+
+var 变量
+常量关键字 const
+常量的值会在编译的时候确定。因为函数调用发生在运行时，所以不能将函数的返回值赋值给常量。
+
+程序简述
+每个 Go文件 开头应该进行 package name 声明
+导出名字 在GO 中任何以大写字母开头的变量和函数都是被导出的名字（其他包只能访问大写字母开头的变量或函数）
+init 函数：所有包都可以包含一个 init 函数。init 函数不应该有任何返回值类型和参数，在我们的代码中也不能显式地调用它
+/--------------------------------
+错误屏蔽器(导包未使用）
+_"未使用的包"
+/--------------------------------
+数组
+len:数组的长度
+
+追加切片元素：如果切片由数组支持，并且数组本身的长度是固定的，那么切片如何具有动态长度。以及内部发生了什么，当新的元素被添加到切片时，会创建一个新的数组。现有数组的元素被复制到这个新数组中，并返回这个新数组的新切片引用
+//--------
+%x ：格式限定符用于指定16进制编码
+%c:格式限定符用于打印字符串的字符
+%T：输出值类型
+
+
+//--------------------接口
+在GO语言中，如果一个类型包含了接口中声明的的所有方法，那么它就隐式的实现了GO接口
+空接口：没有包涵方法，因此所有类型都实现了空接口
+
+接口零值 nil: type:<nil>,value:<nil> 调用接口内的方法会报错
+
+defer 
+（教程 19）其原因是：对于使用指针接受者的方法，用一个指针或者一个可取得地址的值来调用都是合法的。但接口中存储的具体值（Concrete Value）并不能取到地址，因此在第 45 行，对于编译器无法自动获取 a 的地址，于是程序报错。 
+defer:
+panic
+只有在相同的 Go 协程中调用 recover 才管用。recover 不能恢复一个不同协程的 panic。我们用一个例子来理解这一点。
+运行时错误（如数组越界）也会导致 panic。
+当我们恢复 panic 时，我们就释放了它的堆栈跟踪。实际上，在上述程序里，恢复 panic 之后，我们就失去了堆栈跟踪。
+有办法可以打印出堆栈跟踪，就是使用 Debug 包中的 PrintStack 函数。
+
+当一个函数内多次调用 defer 时，Go 会把 defer 调用放入到一个栈中，随后按照后进先出（Last In First Out, LIFO）的顺序执行
+信道-----
+死锁：发送无接收  接收无发送
+vim-go: could not find 'gotags'. Run :GoInstallBinaries to fix it^[[2;2R
+信道  close()
+
+reflect:   方法
+TypeOf() ValueOf() .Name()
+
+
+TypeOf:
+kind()  
+
+ValueOf:
+NumField()  Field(int i) Int() Stiring()
+Field:
+Int() Stiring()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

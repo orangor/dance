@@ -1,0 +1,4 @@
+vim /etc/sysconfig/iptables ÅäÖÃ·À»ğÇ½
+service redis start
+»òÕß
+systemctl start redis

@@ -1,0 +1,28 @@
+条件判断：交互比较小
+非条件判断：交互多（hidden）
+
+onLoad:function(){}//初始化
+onShow:function(){}//初始加载（每次被显示调用一次。。可见）
+onReady:function(){}//初始加载完成（每次可以交互调用一次）
+onHide:function(){}//每次隐藏状态（调用一次）
+onUnload:function(){}//页面被关闭，被卸载
+findtop:
+bindtap:触发自己,向父级元素传递
+catchtap:触发自己,不会向父级元素传递
+
+url:
+method:"GET",
+data:{
+x:1,
+y:2,
+}
+header:{}
+success :function(res){}
+fail:function(){}
+complete:function(){}
+
+
+onPullDownRefresh：下拉刷新
+onReachBottom ：上划触底
+onPageScroll：滑动
+onShareAaaMessage：分享

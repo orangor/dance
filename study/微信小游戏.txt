@@ -1,0 +1,20 @@
+开放数据域
+wx.getFriendCloudStorage()好友关系
+wx.getGroupCloudStorage()群关系
+主域项目:(正常的游戏项目)
+开放数据域项目工程(通过微信API获取用户数据来做排行榜等功能的项目)
+整合方法:
+1.创建开放数据域通过相关API获取用户数据.(然后根据情况制作UI,只包含内容UI,将该场景中Canvas组件的设计分辨率设置为UI的完整分辨率)
+2.主域中创建一个节点作为开放数据域容器 WXSubContextView 设置开放数据域视窗,更新开放域贴图,节点宽高比等于开放数据域设计分辨率的宽高比
+WXSubContextView技巧:
+视窗更新
+手动更新贴图
+
+
+wx.onMessage
+wx.getUserInfo
+wx.getFriendCloudStorage
+
+
+getUserInfo()//用户授权窗口调用
+模拟排行榜(上传分数排序)
